@@ -35,15 +35,9 @@ const MEETING_ID="ca9ac760-a563-488e-b8ae-658c3aa77573";
 
 //mapping of savvy cards to NRDS ID's
 $savvy_card_id = array(
-    "http://savvycard.com/go/z1xu052" => "279545559",      // deborah - ALL SET
-    "http://www.savvycard.com/go/e1ehewy" => "279536055", // Marty D. Nash - No QR Code on Savvy Card
-    "http://www.savvycard.com/go/vng8zzv" => "729525837", // Leticia oliver - No QR Code on Savvy Card
-    "http://www.savvycard.com/go/ev0zg70" => "277030309", // Joseph Penalver - NO QR Code on Savvy Card
-    "http://www.savvycard.com/go/lcsuj15" => "277041119", //David Garcia - Cant Find Miami Assoc Savvy Card
+    
     "http://www.savvycard.com/go/3ypdkl1" => "084001677", //David Conroy
-    "http://www.savvycard.com/go/ybl8wfe" => "NO NRDS", //Daud Power
-    "http://www.savvycard.com/go/sc04hl8" => "NO NRDS", //David Etheridge
-//    "" => "81692795", // Teresa Kinney - NO QR Code on Savvy Card
+  
 );
 
 
