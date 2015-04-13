@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Mobile Checkin</title>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            var pressed = false;
+            var chars = [];
+            $(window).keypress(function(e) {
+
+                    chars.push(String.fromCharCode(e.which));
+
+                console.log(e.which + ":" + chars.join("|"));
+                if (pressed == false) {
+                    setTimeout(function(){
+                        // check we have a long length e.g. it is a barcode
+                        if (chars.length >= 8) {
+                            var barcode = chars.join("");
+                            console.log("Barcode Scanned: " + barcode);
+                            $("#barcode").val(barcode);
+                           document.getElementById("myForm").submit();
+                        }
+                        chars = [];
+                        pressed = false;
+                    },500);
+                }
+                pressed = true;
+            });
+        });
+    </script>
+</head>
+<body><table border=0 width=100%>
+<tr><td align=center><img src='ramcon.png'></td></tr>
+    <tr><td  align=center><form id="myForm" action="process_meeting_reg.php" method="post">
+<input type="text" name ="nrds" id="barcode" placeholder="Waiting for NRDS barcode scan..." size="75" autofocus><br></td></tr>
+<tr><td  align=center><br><br><input type="submit" value="Submit">v2</form></td></tr></td><table>
+ 
+</body>
+</html>
