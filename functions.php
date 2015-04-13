@@ -1,12 +1,25 @@
 <?php
-
+ /**
+ * Functions.php
+ * A list of useful functions for updating and modifiying Meeting Registrations
+ * Written by David Conroy
+ * 4/12/15 
+ * https://github.com/RAMCO-AMS
+ */
+ 
+ 
+ /**
+ * Mark a meeting registration as attended 
+ * @param string $meeting_registration_guid 
+ * @return null
+ */
 function mark_meeting_attended($meeting_registration_guid){
                 
                   $post['key'] = API_KEY;
                   $post['operation'] = 'updateEntity';
                   $post['entity'] = 'cobalt_meetingregistration';
                   $post['guid']= $meeting_registration_guid;
-                  $post['AttributeValues'] = 'cobalt_attendedmeeting=true,cobalt_mobilecheckin=true';
+                  $post['AttributeValues'] = 'cobalt_attendedmeeting=true,cobalt_mobilecheckin=true'; //cobalt_mobilecheckin is a custom attribute of type bool
                   $json = curl_request($post);
                   $updateRegistrations = json_decode($json,true);
 
@@ -21,6 +34,11 @@ function mark_meeting_attended($meeting_registration_guid){
     
 }
 
+ /**
+ * Returns an array of active meeting registrations from a given Contact Record GUID
+ * @param string $contact_id
+ * @return array $registrations of active meeting registrations
+ */
 function getMeetingRegistrationFromContactID($contact_id){
          
             $post = array();
@@ -43,6 +61,11 @@ function getMeetingRegistrationFromContactID($contact_id){
             
 }
 
+ /**
+ * Looks up Contact ID from given a NRDS Number
+ * @param string $nrds
+ * @return string of guid or null if no contact found 
+ */
 function getContactIDFromNRDS($nrds){
     $post = array();
     $post['key'] = API_KEY;
@@ -66,6 +89,13 @@ function getContactIDFromNRDS($nrds){
 
     
 }
+
+
+ /**
+ * Plays a failure tone and prints a message to screen. 
+ * @param array string $message
+ * @return null
+ */
 function print_error($message){
      echo $message."<br>";
      echo "<audio controls autoplay>
@@ -78,6 +108,11 @@ function print_error($message){
     }
 }
 
+ /**
+ * Plays a success tone and prints a message to screen. 
+ * @param array string $message
+ * @return null
+ */
 function print_success($message){
     echo $message."<br>";
     echo "<audio controls autoplay>
@@ -88,6 +123,11 @@ function print_success($message){
     }
 }
 
+ /**
+ * Experimental Function to Print Name Bade upon Checkin 
+ * @param string $first_name string $last_name
+ * @return null
+ */
 function print_badge($first_name,$last_name){
     
 if(PRINTING==TRUE){        
@@ -101,8 +141,8 @@ if(PRINTING==TRUE){
 }
 
 
-/**
- * Handles the sending of requests to the RAMCO AP
+ /**
+ * Handles the sending of requests to the RAMCO API
  */
 function curl_request($post) {
     $curl = curl_init();
